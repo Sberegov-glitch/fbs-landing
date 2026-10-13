@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System10X — найдём потери вашего FBS-магазина на Wildberries</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Segoe UI', system-ui, -apple-system, sans-serif; background:#120f1d; color:#e2e8f0; line-height:1.6; }
+  .wrap { max-width:1100px; margin:0 auto; padding:0 24px; }
+  .accent { color:#a78bfa; }
+  .money { color:#4ade80; }
+
+  /* HERO */
+  .hero { padding:72px 0 64px; background:radial-gradient(ellipse at 70% 20%, rgba(124,58,237,0.25), transparent 60%), #120f1d; }
+  .badge { display:inline-block; background:rgba(124,58,237,0.2); border:1px solid rgba(167,139,250,0.4); color:#c4b5fd; padding:6px 14px; border-radius:20px; font-size:13px; margin-bottom:24px; }
+  h1 { font-size:42px; line-height:1.2; font-weight:800; max-width:720px; }
+  h1 .strike { color:#f87171; }
+  .sub { font-size:19px; color:#94a3b8; max-width:640px; margin:20px 0 32px; }
+  .sub b { color:#e2e8f0; }
+  .cta-row { display:flex; gap:16px; flex-wrap:wrap; align-items:center; }
+  .btn { display:inline-block; background:linear-gradient(135deg,#7c3aed,#9333ea); color:#fff; font-weight:700; font-size:17px; padding:16px 32px; border-radius:12px; text-decoration:none; box-shadow:0 8px 24px rgba(124,58,237,0.4); transition:transform .15s; }
+  .btn:hover { transform:translateY(-2px); }
+  .btn-note { font-size:13px; color:#64748b; }
+  .proof { display:flex; gap:32px; margin-top:40px; flex-wrap:wrap; }
+  .proof-item b { display:block; font-size:26px; color:#fff; }
+  .proof-item span { font-size:13px; color:#94a3b8; }
+
+  /* Мокап дашборда */
+  .hero-flex { display:flex; gap:48px; align-items:center; }
+  .hero-left { flex:1.2; }
+  .mock { flex:1; background:#1a1628; border:1px solid rgba(167,139,250,0.25); border-radius:16px; padding:20px; min-width:300px; box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+  .mock-title { font-size:12px; color:#64748b; text-transform:uppercase; letter-spacing:1px; margin-bottom:14px; }
+  .mock-big { font-size:30px; font-weight:800; color:#f87171; }
+  .mock-sub { font-size:12px; color:#94a3b8; margin-bottom:16px; }
+  .mock-row { display:flex; justify-content:space-between; font-size:13px; padding:9px 0; border-top:1px solid rgba(255,255,255,0.07); }
+  .mock-row span:last-child { font-weight:700; color:#fca5a5; }
+
+  /* Секции */
+  section { padding:72px 0; }
+  .sec-dark { background:#17132a; }
+  h2 { font-size:32px; font-weight:800; margin-bottom:12px; }
+  .sec-sub { color:#94a3b8; font-size:17px; margin-bottom:40px; max-width:640px; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
+  .card { background:#1e1a30; border:1px solid rgba(255,255,255,0.07); border-radius:16px; padding:28px; }
+  .card .emoji { font-size:30px; margin-bottom:14px; }
+  .card h3 { font-size:18px; margin-bottom:10px; color:#fff; }
+  .card p { font-size:14.5px; color:#94a3b8; }
+  .card .price-tag { display:inline-block; margin-top:14px; background:rgba(248,113,113,0.12); color:#fca5a5; font-size:13px; font-weight:700; padding:5px 12px; border-radius:8px; }
+
+  /* Шаги */
+  .steps { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:20px; }
+  .step { position:relative; background:#1e1a30; border-radius:16px; padding:28px; border:1px solid rgba(255,255,255,0.07); }
+  .step-num { width:36px; height:36px; border-radius:50%; background:#7c3aed; color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .step h3 { font-size:17px; margin-bottom:8px; }
+  .step p { font-size:14px; color:#94a3b8; }
+
+  /* Отчёты */
+  .reports { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; }
+  .report { background:#1e1a30; border:1px solid rgba(167,139,250,0.2); border-radius:14px; padding:22px; }
+  .report h4 { font-size:15.5px; color:#c4b5fd; margin-bottom:8px; }
+  .report p { font-size:13.5px; color:#94a3b8; }
+  .more-note { text-align:center; color:#64748b; font-size:14px; margin-top:24px; }
+
+  /* Финал */
+  .final { text-align:center; background:radial-gradient(ellipse at 50% 100%, rgba(124,58,237,0.3), transparent 70%), #120f1d; }
+  .final h2 { font-size:34px; max-width:700px; margin:0 auto 16px; }
+  .final .sec-sub { margin:0 auto 32px; }
+  .guarantees { display:flex; gap:24px; justify-content:center; flex-wrap:wrap; margin-top:36px; }
+  .g-item { font-size:14px; color:#94a3b8; }
+  .g-item::before { content:"✓ "; color:#4ade80; font-weight:700; }
+
+  footer { padding:28px 0; text-align:center; color:#475569; font-size:13px; border-top:1px solid rgba(255,255,255,0.06); }
+
+  @media (max-width:860px){
+    .hero-flex { flex-direction:column; }
+    h1 { font-size:30px; }
+    .mock { width:100%; min-width:unset; }
+    section { padding:52px 0; }
+    h2 { font-size:25px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- БЛОК 1: ПЕРВЫЙ ЭКРАН -->
+<header class="hero">
+  <div class="wrap hero-flex">
+    <div class="hero-left">
+      <div class="badge">Сервис аналитики FBS · 2 000+ селлеров WB каждый день</div>
+      <h1>Ваш товар лежит на полке. А покупатель видит <span class="strike">«нет в наличии»</span></h1>
+      <p class="sub">Найдём, сколько денег ваш FBS-магазин теряет на фантомных остатках, штрафах за сроки сборки и отменах. <b>Бесплатно за 3 дня — настроим всё за вас.</b></p>
+      <div class="cta-row">
+        <a class="btn" href="#">Показать мои потери за месяц →</a>
+        <span class="btn-note">Подключение по API за 10 минут.<br>Тест начнётся после полной настройки.</span>
+      </div>
+      <div class="proof">
+        <div class="proof-item"><b>2 000+</b><span>селлеров пользуются ежедневно</span></div>
+        <div class="proof-item"><b>12</b><span>отчётов в одном окне</span></div>
+        <div class="proof-item"><b>0 ₽</b><span>за настройку — делаем за вас</span></div>
+      </div>
+    </div>
+    <div class="mock">
+      <div class="mock-title">Потери за 30 дней · Ваш магазин</div>
+      <div class="mock-big">− 184 500 ₽</div>
+      <div class="mock-sub">упущенная выручка по 4 причинам</div>
+      <div class="mock-row"><span>«Нет в наличии» при реальном остатке</span><span>− 96 200 ₽</span></div>
+      <div class="mock-row"><span>Штрафы за просрочку сборки</span><span>− 41 800 ₽</span></div>
+      <div class="mock-row"><span>Отмены заказов</span><span>− 29 300 ₽</span></div>
+      <div class="mock-row"><span>Неоптимальные склады отгрузки</span><span>− 17 200 ₽</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- БЛОК 2: ГДЕ УТЕКАЮТ ДЕНЬГИ -->
+<section class="sec-dark">
+  <div class="wrap">
+    <h2>Три дыры, через которые утекает выручка FBS-магазина</h2>
+    <p class="sec-sub">Wildberries не покажет вам это в своей аналитике. Поэтому большинство селлеров теряют деньги месяцами — и не знают об этом.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="emoji">👻</div>
+        <h3>Фантомное «нет в наличии»</h3>
+        <p>Остатки на WB обнулились из-за сбоя синхронизации — товар есть, а карточка не продаёт. Каждый час простоя топовой карточки — это заказы, которые забрал конкурент.</p>
+        <span class="price-tag">до 30 % упущенных заказов</span>
+      </div>
+      <div class="card">
+        <div class="emoji">⏱</div>
+        <h3>Штрафы за сроки сборки и отмены</h3>
+        <p>Просрочили сборку — WB снижает рейтинг и режет выдачу. Отменили заказ — штраф. Без контроля по каждому складу вы узнаёте о проблеме, когда деньги уже списаны.</p>
+        <span class="price-tag">штраф с каждой отмены</span>
+      </div>
+      <div class="card">
+        <div class="emoji">🗺</div>
+        <h3>Товар не на тех складах</h3>
+        <p>Склад даёт 49 % ваших заказов, а хранит 9 % остатка. Товар едет к покупателю дольше — карточка падает в выдаче, заказы уходят тем, кто ближе.</p>
+        <span class="price-tag">минус позиции в поиске</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- БЛОК 3: КАК ЭТО РАБОТАЕТ -->
+<section>
+  <div class="wrap">
+    <h2>От подключения до найденных потерь — 1 день</h2>
+    <p class="sec-sub">Ничего не нужно заполнять руками. Все данные подтягиваются по API Wildberries автоматически.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Подключаете API-ключ</h3>
+        <p>10 минут по инструкции. Доступ только на чтение — безопасно для вашего кабинета.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Менеджер настраивает всё за вас</h3>
+        <p>Склады, себестоимость, отчёты. Бесплатный тест стартует только после полной настройки — вы не потратите его на разбирательства.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Видите потери и маржу в цифрах</h3>
+        <p>Сколько выручки упущено, где косячат склады, что и куда довезти. Видно, кто косячит — и сколько это стоит.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- БЛОК 4: ЧТО ВНУТРИ -->
+<section class="sec-dark">
+  <div class="wrap">
+    <h2>4 отчёта, которые селлеры открывают каждое утро</h2>
+    <p class="sec-sub">Вместо таблиц в Excel и восьми вкладок кабинета WB — одно окно с ответами.</p>
+    <div class="reports">
+      <div class="report">
+        <h4>💸 Потери за период</h4>
+        <p>Сколько денег упущено и по каким причинам: обнуления, отмены, просрочки. С точностью до артикула.</p>
+      </div>
+      <div class="report">
+        <h4>📦 Матрица складов</h4>
+        <p>Какой склад даёт заказы, а какой — простаивает. Куда довезти товар, чтобы расти в выдаче.</p>
+      </div>
+      <div class="report">
+        <h4>🚨 Отмены и штрафы</h4>
+        <p>Каждая отмена с причиной и суммой. Видно, какой склад и какой сотрудник генерирует убытки.</p>
+      </div>
+      <div class="report">
+        <h4>📈 Маржа по каждому SKU</h4>
+        <p>Реальная прибыль после комиссий, логистики и штрафов — а не «оборот», которым хвастается кабинет WB.</p>
+      </div>
+    </div>
+    <p class="more-note">+ ещё 8 отчётов: остатки, сроки сборки, география заказов и другие. Докупать модули не нужно — всё включено.</p>
+  </div>
+</section>
+
+<!-- БЛОК 5: ФИНАЛЬНЫЙ CTA -->
+<section class="final">
+  <div class="wrap">
+    <h2>Узнайте, сколько потерял ваш магазин за последний месяц</h2>
+    <p class="sec-sub">Подключим, настроим и покажем ваши цифры — бесплатно. Если потерь нет, вы просто убедитесь, что всё под контролем.</p>
+    <a class="btn" href="#">Получить разбор потерь бесплатно →</a>
+    <div class="guarantees">
+      <span class="g-item">3 дня полного доступа</span>
+      <span class="g-item">Настройка — за наш счёт</span>
+      <span class="g-item">API только на чтение</span>
+      <span class="g-item">Без привязки карты</span>
+    </div>
+  </div>
+</section>
+
+<footer>System10X · Сервис аналитики FBS для селлеров Wildberries · Концепт лендинга — тестовое задание</footer>
+
+</body>
+</html>
